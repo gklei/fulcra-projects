@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="result" aria-labelledby="page-title">
+  <div class="card saved-card">
+    <p class="eyebrow">Fulcra pairing</p>
+    <h1 id="page-title">{% if status and status.state == "ready" %}Ready to compare{% elif status and status.state == "waiting-for-them" %}Waiting for the other builder{% elif status %}Your approval is needed{% else %}Invite another builder{% endif %}</h1>
+
+    {% if status and status.state == "ready" %}
+      <p role="status">Both of you currently share a Builder Taste Profile. A comparison may now read those two profiles.</p>
+    {% elif status and status.state == "waiting-for-them" %}
+      <p role="status">Your profile share is active. Send your link below so the other builder can approve their profile share.</p>
+    {% elif status %}
+      <p role="status">Comparison stays blocked until you explicitly share your derived profile and the other builder does the same.</p>
+    {% else %}
+      <p>Send this link to a Fulcra user you want to compare with. Pair links contain only your Fulcra user ID and profile-type route.</p>
+    {% endif %}
+
+    <p><strong>Your pair link</strong></p>
+    <p class="pair-link"><a href="{{ my_pair_path }}">{{ my_pair_path }}</a></p>
+    <p class="attribution">Only Builder Taste Profile records are shared. Private GitHub star records are never included.</p>
+  </div>
+
+  {% if status %}
+  <aside class="actions" aria-label="Pair controls">
+    {% if not status.outgoing_share_ids %}
+      <form action="/pair/{{ pair_token }}/share" method="post">
+        <button type="submit">Share only my profile</button>
+      </form>
+    {% else %}
+      {% if status.state == "ready" %}
+      <a class="button-link" href="/pair/{{ pair_token }}/compare">Reveal our Build Chemistry</a>
+      {% endif %}
+      <form action="/pair/{{ pair_token }}/revoke" method="post">
+        <button type="submit">Revoke my profile share</button>
+      </form>
+    {% endif %}
+    <p>Status is checked fresh in Fulcra on every visit. Revocation blocks the next profile read.</p>
+  </aside>
+  {% endif %}
+</section>
+{% endblock %}

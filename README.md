@@ -5,3 +5,4 @@ A collection of applications, prototypes, and agent skills built on top of [Fulc
 ## Projects
 
 - **[Flow State App](./flow-state-app)** — Audio capture web app that enables musicians to record sessions and asynchronously extract semantic musical ideas via acoustic markers, stored in Fulcra as custom annotations.
+- **[Build Chemistry](./build-chemistry)** — Turns public GitHub stars into playful Builder Personality cards, with private Fulcra profile storage and reciprocal profile sharing.

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="comparison-result" aria-labelledby="comparison-title">
+  <article class="chemistry-card">
+    <header class="chemistry-heading">
+      <p class="eyebrow">Build Chemistry · {{ lens_labels[comparison.lens] }} {{ comparison.lens_version }}</p>
+      <h1 id="comparison-title">Two star trails.<br>One workshop.</h1>
+    </header>
+
+    <section class="personality-pair" aria-label="Builder personalities">
+      {% for personality in comparison.personalities %}
+      <div class="personality">
+        <p class="handle">@{{ personality.github_username }}</p>
+        <h2>{{ personality.personality_name }}</h2>
+        <p>{{ personality.blurb }}</p>
+      </div>
+      {% endfor %}
+    </section>
+
+    <dl class="chemistry-fields">
+      <div>
+        <dt>Shared obsession</dt>
+        <dd>{{ comparison.shared_obsession }}</dd>
+      </div>
+      <div>
+        <dt>Productive disagreement</dt>
+        <dd>{{ comparison.productive_disagreement }}</dd>
+      </div>
+      <div>
+        <dt>Build this together</dt>
+        <dd>{{ comparison.build_idea }}</dd>
+      </div>
+      <div class="verdict">
+        <dt>Chemistry verdict</dt>
+        <dd>{{ comparison.chemistry_verdict }}</dd>
+      </div>
+    </dl>
+
+    <p class="attribution">{{ attribution }}</p>
+  </article>
+
+  <aside class="actions export-panel" aria-labelledby="export-title">
+    <h2 id="export-title">Share the reveal</h2>
+    <p>Print or save this card from your browser. The comparison URL checks both Fulcra shares again on every visit.</p>
+    <button type="button" onclick="window.print()">Print or save card</button>
+    <p class="export-warning"><strong>Before you export:</strong> saved or copied cards cannot be remotely revoked. Revoking a Fulcra share blocks fresh comparisons only.</p>
+    <p><a href="/pair/{{ pair_token }}">Back to pair controls</a></p>
+  </aside>
+</section>
+{% endblock %}
