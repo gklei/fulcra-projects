@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="status-panel" aria-labelledby="page-title">
+  <p class="eyebrow">Fulcra connection</p>
+  <h1 id="page-title">{{ title }}</h1>
+  {% if authenticated %}
+    <p role="status">Connected as <strong>{{ user_label }}</strong>. You can explicitly save a profile from its card.</p>
+    {% if username %}<a class="button-link" href="/u/{{ username }}">Return to @{{ username }}'s card</a>{% endif %}
+  {% else %}
+    <p role="alert">Build Chemistry could not find an authenticated Fulcra session. Nothing was saved.</p>
+    <p>Authenticate with the Fulcra SDK on this device, then return and choose <strong>Authenticate and save privately</strong> again.</p>
+    {% if username %}<a class="button-link" href="/u/{{ username }}">Return to the public card</a>{% else %}<a href="/">Return home</a>{% endif %}
+  {% endif %}
+  <p class="hint">Your Fulcra credentials and private records are never placed in a public card or URL.</p>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+.git/
+.venv/
+.pytest_cache/
+**/__pycache__/
+app/tests/
+harness/
+build_chemistry_harness.egg-info/
+pyproject.toml
+uv.lock

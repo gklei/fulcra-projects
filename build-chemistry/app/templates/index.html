@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero" aria-labelledby="page-title">
+  <p class="eyebrow">Public stars → playful profile</p>
+  <h1 id="page-title">Meet your Builder Personality</h1>
+  <p class="lede">Enter any public GitHub username. You will get a useful card without creating an account.</p>
+  <form class="username-form" action="/card" method="get">
+    <label for="username">GitHub username</label>
+    <div class="form-row">
+      <input id="username" name="username" required maxlength="39" autocomplete="off" spellcheck="false" placeholder="octocat" aria-describedby="username-help">
+      <button type="submit">Make a card</button>
+    </div>
+    <p id="username-help" class="hint">Public activity only. We never ask for a GitHub token.</p>
+  </form>
+</section>
+{% endblock %}

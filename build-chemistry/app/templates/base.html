@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A playful Builder Personality made from public GitHub stars.">
+  <title>{% if title %}{{ title }} · {% endif %}Build Chemistry</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='/app.css') }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Build Chemistry home">
+      <span aria-hidden="true">⚗</span> Build Chemistry
+    </a>
+    <p>What do your stars say about how you build?</p>
+  </header>
+  <main id="main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>Uses at most the latest 100 public stars. No GitHub sign-in or token required.</p>
+  </footer>
+</body>
+</html>

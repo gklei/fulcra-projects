@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="result" aria-labelledby="card-title">
+  <div class="card">
+    <p class="eyebrow">@{{ profile.github_username }} · {{ lens_labels[profile.lens] }} lens</p>
+    <h1 id="card-title">{{ profile.personality_name }}</h1>
+    <p class="blurb">{{ profile.blurb }}</p>
+    <dl class="facts" aria-label="Public star summary">
+      <div><dt>Stars sampled</dt><dd>{{ profile.features.star_count }}</dd></div>
+      <div><dt>Languages</dt><dd>{{ profile.features.language_counts|length }}</dd></div>
+      <div><dt>Builders</dt><dd>{{ profile.features.owner_count }}</dd></div>
+    </dl>
+    {% if profile.features.language_counts %}
+    <p class="signal"><strong>Top language:</strong> {{ profile.features.language_counts[0].name }}</p>
+    {% endif %}
+    {% if profile.features.topic_counts %}
+    <p class="signal"><strong>Recurring interest:</strong> {{ profile.features.topic_counts[0].name }}</p>
+    {% endif %}
+    <p class="attribution">{{ attribution }}</p>
+  </div>
+
+  <aside class="actions" aria-labelledby="save-title">
+    <h2 id="save-title">Make it yours in Fulcra</h2>
+    <p>Authenticate to save the normalized stars privately, keep this profile, or try a preset lens.</p>
+    <form action="/profiles/save" method="post">
+      <input type="hidden" name="username" value="{{ profile.github_username }}">
+      <fieldset>
+        <legend>Personality lens</legend>
+        {% for lens in lenses %}
+        <label class="lens-option">
+          <input type="radio" name="lens" value="{{ lens }}" {% if lens == "default" %}checked{% endif %}>
+          <span>{{ lens_labels[lens] }}</span>
+        </label>
+        {% endfor %}
+      </fieldset>
+      <button type="submit">Authenticate and save privately</button>
+    </form>
+    <p><a href="/fulcra?username={{ profile.github_username }}">Check Fulcra connection</a></p>
+    <p class="hint">Saving does not verify ownership of this GitHub username. Private star records are never shared by Build Chemistry.</p>
+  </aside>
+
+  <nav class="secondary-links" aria-label="Card actions">
+    <a href="/">Try another username</a>
+    <a href="/u/{{ profile.github_username }}">Shareable card link</a>
+  </nav>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="status-panel" aria-labelledby="page-title">
+  <p class="eyebrow">Build Chemistry</p>
+  <h1 id="page-title">{{ title }}</h1>
+  <p role="alert">{{ message }}</p>
+  {% if username %}<a class="button-link" href="/u/{{ username }}">Try this username again</a>{% endif %}
+  <p><a href="/">Enter another username</a></p>
+</section>
+{% endblock %}

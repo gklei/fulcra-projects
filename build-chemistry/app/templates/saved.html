@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="result" aria-labelledby="page-title">
+  <div class="card saved-card">
+    <p class="eyebrow">Saved privately · {{ lens_labels[profile.lens] }} lens</p>
+    <h1 id="page-title">{{ profile.personality_name }}</h1>
+    <p class="blurb">{{ profile.blurb }}</p>
+    <p role="status"><strong>Saved to your Fulcra context.</strong> {{ profile.features.star_count }} normalized star records and this derived profile were submitted with deterministic identities.</p>
+    <p class="attribution">{{ attribution }}</p>
+  </div>
+  <aside class="actions" aria-labelledby="customize-title">
+    <h2 id="customize-title">Try another preset lens</h2>
+    <p>Choosing a lens creates a versioned profile. It does not expose your private star records.</p>
+    <form action="/profiles/save" method="post">
+      <input type="hidden" name="username" value="{{ profile.github_username }}">
+      <label for="lens">Personality lens</label>
+      <select id="lens" name="lens">
+        {% for lens in lenses %}<option value="{{ lens }}" {% if lens == profile.lens %}selected{% endif %}>{{ lens_labels[lens] }}</option>{% endfor %}
+      </select>
+      <button type="submit">Save this lens</button>
+    </form>
+  </aside>
+  <nav class="secondary-links" aria-label="Saved profile actions">
+    <a href="/pair">Pair with another Fulcra user</a>
+    <a href="/u/{{ profile.github_username }}">View public default card</a>
+    <a href="/">Try another username</a>
+  </nav>
+</section>
+{% endblock %}
